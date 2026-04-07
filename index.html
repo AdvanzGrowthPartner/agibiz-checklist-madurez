@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>¿Está tu proyecto de software bien definido? | AgiBiz</title>
-    <meta name="description" content="Evalúa la madurez de tu proyecto de software con este checklist de 28 criterios. Descubre brechas antes de invertir en desarrollo.">
+    <meta name="description" content="Evalúa la madurez de tu proyecto de software con este checklist de 10 criterios. Descubre brechas antes de invertir en desarrollo.">
 
     <!-- Meta Pixel placeholder -->
     <!-- TODO: Insertar Meta Pixel aquí -->
 
     <!-- Open Graph -->
     <meta property="og:title" content="Checklist de Madurez para Proyectos de Software | AgiBiz">
-    <meta property="og:description" content="28 criterios que todo proyecto debe cumplir antes de iniciar desarrollo. Evalúa el tuyo en 5 minutos.">
+    <meta property="og:description" content="10 criterios que todo proyecto debe cumplir antes de iniciar desarrollo. Evalúa el tuyo en 2 minutos.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://agibiz.cl/checklist-madurez">
 
@@ -1348,14 +1348,14 @@
         <div class="hero-content">
             <div class="hero-eyebrow">
                 <span class="dot"></span>
-                Diagnóstico gratuito · 5 min
+                Diagnóstico gratuito · 2 min
             </div>
             <h1 class="hero-title">
                 El 68% de los proyectos de software
                 <span class="highlight">fracasan antes de empezar.</span>
             </h1>
             <p class="hero-desc">
-                No por falta de talento técnico — por falta de definición. Evalúa la madurez de tu proyecto con 28 criterios clave y descubre las brechas que podrían costarte meses de retrabajo.
+                No por falta de talento técnico — por falta de definición. Evalúa la madurez de tu proyecto con 10 criterios clave y descubre las brechas que podrían costarte meses de retrabajo. Solo toma 2 minutos.
             </p>
             <button class="hero-start-btn" onclick="startQuiz()">
                 Evaluar mi proyecto
@@ -1393,7 +1393,7 @@
                         <circle class="ring-fill" id="ringFill" cx="32" cy="32" r="30"/>
                     </svg>
                     <div class="ring-text">
-                        <div class="ring-num" id="ringNum">0/28</div>
+                        <div class="ring-num" id="ringNum">0/10</div>
                     </div>
                 </div>
                 <div class="progress-meta">
@@ -1508,9 +1508,7 @@
             service: 'Consultoría estratégica y requerimientos',
             questions: [
                 'Tenemos claro el problema de negocio principal que este software debe resolver.',
-                'Hemos definido indicadores de éxito medibles (ej. reducción de tiempos, mayor eficiencia, eliminación de procesos manuales).',
-                'Existe un sponsor o responsable ejecutivo que respalda e impulsa el proyecto.',
-                'Las áreas de negocio involucradas están alineadas con la necesidad del proyecto.'
+                'Hemos definido indicadores de éxito medibles (ej. reducción de tiempos, mayor eficiencia, eliminación de procesos manuales).'
             ]
         },
         {
@@ -1518,10 +1516,7 @@
             icon: '📐', subtitle: '¿Qué entra y qué queda fuera?',
             service: 'Levantamiento de requerimientos',
             questions: [
-                'Contamos con una lista de funcionalidades o módulos clave que debe incluir el sistema.',
-                'Hemos diferenciado lo indispensable (must-have) de lo deseable (nice-to-have).',
-                'Está definido explícitamente qué queda fuera del alcance del proyecto.',
-                'Los usuarios clave han validado o participado en la definición de funcionalidades.'
+                'Hemos diferenciado lo indispensable (must-have) de lo deseable (nice-to-have) y lo que queda fuera del alcance.'
             ]
         },
         {
@@ -1529,10 +1524,7 @@
             icon: '👥', subtitle: '¿Para quién y sobre qué procesos?',
             service: 'Diseño UX y levantamiento de procesos',
             questions: [
-                'Identificamos los roles y perfiles de los usuarios que utilizarán el sistema.',
-                'Los procesos actuales que el sistema apoyará o reemplazará son conocidos o están documentados.',
-                'Conocemos el volumen estimado de usuarios y el nivel de carga transaccional esperado.',
-                'Hemos considerado requisitos especiales de usabilidad (idiomas, dispositivos, accesibilidad).'
+                'Identificamos los roles de usuario y los procesos que el sistema apoyará o reemplazará.'
             ]
         },
         {
@@ -1540,10 +1532,7 @@
             icon: '🔗', subtitle: '¿Cómo se conecta con lo existente?',
             service: 'Arquitectura de integraciones',
             questions: [
-                'Identificamos los sistemas o plataformas existentes con los que el nuevo sistema deberá conectarse.',
-                'Conocemos el estado y la calidad de los datos actuales que serán migrados o consumidos.',
-                'Hemos determinado si existirá migración de datos históricos y cuál es su volumen aproximado.',
-                'Sabemos si los sistemas con los que se integrará cuentan con APIs o mecanismos de conexión disponibles.'
+                'Sabemos con qué sistemas debe integrarse y si existen APIs o mecanismos de conexión disponibles.'
             ]
         },
         {
@@ -1551,10 +1540,7 @@
             icon: '🛡️', subtitle: '¿Qué límites tiene el proyecto?',
             service: 'Consultoría técnica y arquitectura',
             questions: [
-                'Conocemos las restricciones de seguridad, privacidad o cumplimiento normativo aplicables al proyecto.',
-                'Tenemos definida la infraestructura preferida para el despliegue (nube pública, on-premise, híbrida).',
-                'Hemos identificado requisitos de rendimiento y disponibilidad del sistema (tiempos de respuesta, uptime esperado).',
-                'Existen políticas internas de TI que el nuevo sistema deberá cumplir (tecnologías, estándares, proveedores).'
+                'Conocemos las restricciones de seguridad, privacidad, cumplimiento normativo e infraestructura del proyecto.'
             ]
         },
         {
@@ -1562,10 +1548,7 @@
             icon: '🔍', subtitle: 'Si ya existe algo, ¿en qué estado está?',
             service: 'Evaluación de software legacy',
             questions: [
-                'Sabemos qué aspectos del sistema o proceso actual funcionan bien y deben preservarse.',
-                'Tenemos claridad sobre los problemas críticos que el sistema actual no logra resolver.',
-                'Contamos con documentación técnica del sistema existente, aunque sea básica.',
-                'Hemos evaluado si el sistema puede evolucionar (refactorizar) o si requiere un reemplazo completo.'
+                'Hemos evaluado si el sistema actual puede evolucionar (refactorizar) o si requiere un reemplazo completo.'
             ]
         },
         {
@@ -1573,18 +1556,16 @@
             icon: '⚙️', subtitle: '¿Quién lidera y con qué recursos?',
             service: 'Gestión de proyecto ágil',
             questions: [
-                'Hay un responsable definido del proyecto por parte de la empresa (Product Owner o equivalente).',
-                'Los tomadores de decisión estarán disponibles para validar avances y resolver bloqueos oportunamente.',
-                'Tenemos un presupuesto estimado asignado para el desarrollo del proyecto.',
-                'Conocemos las fechas límite o hitos clave que condicionan la entrega.'
+                'Hay un responsable definido del proyecto (Product Owner o equivalente) con disponibilidad real.',
+                'Tenemos un presupuesto estimado y fechas o hitos clave definidos para la entrega.'
             ]
         }
     ];
 
     // ===== STATE =====
     const answers = {};
-    let currentQ = 0; // 0-27
-    const totalQ = 28;
+    let currentQ = 0;
+    const totalQ = 10;
 
     function getSection(qIndex) {
         let count = 0;
@@ -1944,15 +1925,15 @@
     // ===== RENDER RESULTS =====
     function renderResults(score) {
         let nivel, desc, color;
-        if (score.total >= 23) {
+        if (score.total >= 8) {
             nivel = 'Proyecto Maduro';
             color = '#10b981';
             desc = 'Tu proyecto está bien definido y listo para iniciar el desarrollo con alta predictibilidad. Las brechas menores pueden cerrarse en paralelo al inicio del proyecto.';
-        } else if (score.total >= 15) {
+        } else if (score.total >= 5) {
             nivel = 'En Proceso de Definición';
             color = '#3b82f6';
             desc = 'Tienes una base sólida pero existen brechas que, si no se cierran antes de desarrollar, generarán retrabajo y sobrecostos. La buena noticia: son resolubles con el acompañamiento correcto.';
-        } else if (score.total >= 8) {
+        } else if (score.total >= 3) {
             nivel = 'Etapa Temprana';
             color = '#f59e0b';
             desc = 'Tu proyecto necesita trabajo significativo en definición antes de escribir una línea de código. Invertir en esta etapa ahora te ahorrará meses de retrabajo después.';
@@ -1962,7 +1943,7 @@
             desc = 'El proyecto está en fase conceptual. Necesitas un proceso de descubrimiento y definición estratégica antes de pensar en desarrollo. Esto no es malo — es el punto de partida correcto.';
         }
 
-        const pct = score.total / 28;
+        const pct = score.total / 10;
         const circumference = 2 * Math.PI * 90;
 
         // ── Score + Gauge ──
@@ -1975,7 +1956,7 @@
                 </svg>
                 <div class="gauge-text">
                     <div class="gauge-score" id="gaugeNum" style="color:${color}">0</div>
-                    <div class="gauge-total">de 28</div>
+                    <div class="gauge-total">de 10</div>
                 </div>
             </div>
             <div class="result-level" style="color:${color}">${nivel}</div>
