@@ -528,6 +528,56 @@
             margin-bottom: 32px;
         }
 
+        /* Industry chips (paso 1 del quiz) */
+        .industry-chips {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .industry-chip {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 18px;
+            background: var(--glass);
+            border: 2px solid var(--glass-border);
+            border-radius: 14px;
+            color: var(--white);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            text-align: left;
+            transition: all var(--transition-bounce);
+        }
+
+        .industry-chip:hover {
+            border-color: rgba(96, 165, 250, 0.5);
+            background: rgba(59, 130, 246, 0.08);
+            transform: translateY(-2px);
+        }
+
+        .industry-chip.selected {
+            border-color: var(--blue);
+            background: rgba(59, 130, 246, 0.14);
+            box-shadow: 0 0 20px var(--blue-glow);
+        }
+
+        .industry-chip .ic-icon {
+            font-size: 1.4rem;
+            line-height: 1;
+            flex-shrink: 0;
+        }
+
+        .industry-chip .ic-label {
+            flex: 1;
+        }
+
+        @media (max-width: 640px) {
+            .industry-chips { grid-template-columns: 1fr; }
+        }
+
         /* Answer buttons */
         .answers {
             display: flex;
@@ -1485,7 +1535,7 @@
                 <span class="highlight">fracasan antes de empezar.</span>
             </h1>
             <p class="hero-desc">
-                No por falta de talento técnico — por falta de definición. Evalúa la madurez de tu proyecto con 8 criterios clave y descubre las brechas que podrían costarte meses de retrabajo. Solo toma 90 segundos.
+                No por falta de talento técnico — por falta de definición. Evalúa la madurez de tu proyecto con 6 criterios clave y descubre las brechas que podrían costarte meses de retrabajo. Solo toma 90 segundos.
             </p>
             <button class="hero-start-btn" onclick="startQuiz()">
                 Evaluar mi proyecto
@@ -1523,7 +1573,7 @@
                         <circle class="ring-fill" id="ringFill" cx="32" cy="32" r="30"/>
                     </svg>
                     <div class="ring-text">
-                        <div class="ring-num" id="ringNum">0/8</div>
+                        <div class="ring-num" id="ringNum">0/7</div>
                     </div>
                 </div>
                 <div class="progress-meta">
@@ -1646,27 +1696,11 @@
             ]
         },
         {
-            id: 4, name: 'Datos e Integraciones', accent: 'accent-4',
-            icon: '🔗', subtitle: '¿Cómo se conecta con lo existente?',
-            service: 'Arquitectura de integraciones',
-            questions: [
-                'Identificamos los sistemas con los que el nuevo software deberá conectarse (ERP, CRM, core, APIs externas, etc.).'
-            ]
-        },
-        {
             id: 5, name: 'Restricciones Técnicas', accent: 'accent-5',
             icon: '🛡️', subtitle: '¿Qué límites tiene el proyecto?',
             service: 'Consultoría técnica y arquitectura',
             questions: [
                 'Conocemos las restricciones de seguridad, privacidad y cumplimiento normativo aplicables (ej. CMF, Ley 21.719, ISO 27001).'
-            ]
-        },
-        {
-            id: 6, name: 'Sistema Actual', accent: 'accent-6',
-            icon: '🔍', subtitle: 'Si ya existe algo, ¿en qué estado está?',
-            service: 'Evaluación de software legacy',
-            questions: [
-                'Hemos evaluado si el sistema actual puede evolucionar (refactorizar) o si requiere un reemplazo completo (si aplica).'
             ]
         },
         {
@@ -1679,10 +1713,15 @@
         }
     ];
 
+    const totalSections = sections.length;
+
     // ===== STATE =====
     const answers = {};
     let currentQ = 0;
-    const totalQ = 8;
+    const totalQ = 6;
+    const totalSteps = totalQ + 1; // +1 industria
+    let industrySelected = null;
+    let onIndustryStep = false;
 
     function getSection(qIndex) {
         let count = 0;
@@ -1690,7 +1729,7 @@
             count += sections[i].questions.length;
             if (qIndex < count) return { section: sections[i], indexInSection: qIndex - (count - sections[i].questions.length) };
         }
-        return { section: sections[6], indexInSection: 0 };
+        return { section: sections[sections.length - 1], indexInSection: 0 };
     }
 
     function getGlobalQ(sectionIdx, qIdx) {
@@ -1718,8 +1757,63 @@
     function startQuiz() {
         fireMetaEvent('ChecklistStarted');
         currentQ = 0;
-        renderQuestion(0, 'forward');
+        industrySelected = null;
+        onIndustryStep = true;
+        // limpiar respuestas previas
+        Object.keys(answers).forEach(k => delete answers[k]);
+        renderIndustryStep();
         switchView('heroView', 'quizView');
+    }
+
+    // ===== INDUSTRY STEP =====
+    function renderIndustryStep() {
+        onIndustryStep = true;
+        const stage = document.getElementById('questionStage');
+        const options = [
+            { val: 'seguros', icon: '🛡️', label: 'Seguros' },
+            { val: 'afp', icon: '📊', label: 'AFP / Pensiones' },
+            { val: 'banca', icon: '🏦', label: 'Banca y serv. financieros' },
+            { val: 'telecomunicaciones', icon: '📡', label: 'Telecomunicaciones' },
+            { val: 'retail', icon: '🛒', label: 'Retail y e-commerce' },
+            { val: 'otro', icon: '💼', label: 'Otra industria' }
+        ];
+
+        const chipsHtml = options.map(o => `
+            <button class="industry-chip ${industrySelected === o.val ? 'selected' : ''}" data-val="${o.val}">
+                <span class="ic-icon">${o.icon}</span>
+                <span class="ic-label">${o.label}</span>
+            </button>
+        `).join('');
+
+        stage.innerHTML = `
+            <div class="q-card q-card-enter ${industrySelected ? 'has-answer' : ''}" style="animation-name: cardSlideIn">
+                <div class="q-number">PREGUNTA 1 DE ${totalSteps}</div>
+                <div class="q-text">Para personalizar tu diagnóstico, ¿en qué industria opera tu empresa?</div>
+                <div class="industry-chips">${chipsHtml}</div>
+            </div>
+        `;
+
+        stage.querySelectorAll('.industry-chip').forEach(btn => {
+            btn.addEventListener('click', () => {
+                stage.querySelectorAll('.industry-chip').forEach(b => b.classList.remove('selected'));
+                btn.classList.add('selected');
+                industrySelected = btn.dataset.val;
+                document.getElementById('btnNext').disabled = false;
+                stage.querySelector('.q-card').classList.add('has-answer');
+                updateProgressUI();
+                setTimeout(() => {
+                    onIndustryStep = false;
+                    currentQ = 0;
+                    renderQuestion(0, 'forward');
+                }, 450);
+            });
+        });
+
+        document.getElementById('sectionIndicator').textContent = `PASO 1 DE ${totalSteps}`;
+        document.getElementById('sectionName').innerHTML = `<span class="section-accent accent-2"></span>Tu industria`;
+        document.getElementById('btnPrev').style.visibility = 'hidden';
+        document.getElementById('btnNext').style.visibility = 'hidden';
+        updateProgressUI();
     }
 
     document.getElementById('navCta').addEventListener('click', function(e) {
@@ -1777,9 +1871,10 @@
 
     // ===== RENDER QUESTION =====
     function renderQuestion(qIndex, direction) {
+        onIndustryStep = false;
         const { section, indexInSection } = getSection(qIndex);
         const qText = section.questions[indexInSection];
-        const qNum = qIndex + 1;
+        const qNum = qIndex + 2; // industria es paso 1
         const stage = document.getElementById('questionStage');
 
         const selectedAnswer = answers[qIndex] || null;
@@ -1789,7 +1884,7 @@
 
         stage.innerHTML = `
             <div class="q-card ${animClass} ${selectedAnswer ? 'has-answer' : ''}" style="animation-name: ${enterAnim}">
-                <div class="q-number">PREGUNTA ${qNum} DE ${totalQ}</div>
+                <div class="q-number">PREGUNTA ${qNum} DE ${totalSteps}</div>
                 <div class="q-text">${qText}</div>
                 <div class="answers">
                     <button class="answer-btn btn-si ${selectedAnswer === 'si' ? 'selected' : ''}" onclick="selectAnswer(${qIndex}, 'si', this)">
@@ -1816,11 +1911,11 @@
 
         // Update section info
         const secIdx = sections.indexOf(section);
-        document.getElementById('sectionIndicator').textContent = `SECCIÓN ${secIdx + 1} DE 7`;
+        document.getElementById('sectionIndicator').textContent = `SECCIÓN ${secIdx + 1} DE ${totalSections}`;
         document.getElementById('sectionName').innerHTML = `<span class="section-accent ${section.accent}"></span>${section.name}`;
 
-        // Nav buttons
-        document.getElementById('btnPrev').style.visibility = qIndex > 0 ? 'visible' : 'hidden';
+        // Nav buttons (siempre se puede volver a la industria)
+        document.getElementById('btnPrev').style.visibility = 'visible';
 
         const isLast = qIndex === totalQ - 1;
         const btn = document.getElementById('btnNext');
@@ -1895,13 +1990,16 @@
         if (currentQ > 0) {
             currentQ--;
             renderQuestion(currentQ, 'backward');
+        } else if (!onIndustryStep) {
+            renderIndustryStep();
         }
     }
 
     // ===== UPDATE PROGRESS UI =====
     function updateProgressUI() {
         const answered = Object.keys(answers).length;
-        const pct = answered / totalQ;
+        const totalAnswered = answered + (industrySelected ? 1 : 0);
+        const pct = totalAnswered / totalSteps;
         const circumference = 2 * Math.PI * 30; // r=30
         const offset = circumference * (1 - pct);
 
@@ -1913,7 +2011,7 @@
         else if (pct >= 0.5) ring.style.stroke = '#3b82f6';
         else ring.style.stroke = '#60a5fa';
 
-        document.getElementById('ringNum').textContent = `${answered}/${totalQ}`;
+        document.getElementById('ringNum').textContent = `${totalAnswered}/${totalSteps}`;
     }
 
     // ===== SUBMIT FORM =====
@@ -1926,11 +2024,12 @@
             nombre: nombre,
             email: document.getElementById('fEmail').value,
             telefono: document.getElementById('fTelefono').value,
+            industria: industrySelected || 'otro',
             respuestas: { ...answers },
             score: score,
             timestamp: new Date().toISOString()
         };
-        score.industria = 'otro';
+        score.industria = industrySelected || 'otro';
         score.nombre = nombre;
 
         // TODO: Enviar a GHL webhook
@@ -2092,17 +2191,17 @@
         const firstName = (score.nombre || '').split(' ')[0] || '';
         let nivel, desc, color, headline;
 
-        if (score.total >= 7) {
+        if (score.total >= 5) {
             nivel = 'Proyecto Maduro';
             color = '#10b981';
             headline = `${firstName ? firstName + ', tu' : 'Tu'} proyecto está mejor definido que el 80% de los que llegan a desarrollo.`;
             desc = `Tienes una base sólida para avanzar con alta predictibilidad. En ${ctx.label.toLowerCase()}, esto te pone en una posición privilegiada: las brechas menores que detectamos pueden cerrarse en paralelo al inicio del proyecto sin perder velocidad.`;
-        } else if (score.total >= 5) {
+        } else if (score.total >= 4) {
             nivel = 'En Proceso de Definición';
             color = '#3b82f6';
             headline = `${firstName ? firstName + ', tienes' : 'Tienes'} una buena base — pero hay brechas que, si no se cierran ahora, te van a costar caro después.`;
             desc = `Tu proyecto tiene fundamentos, pero existen áreas que en ${ctx.label.toLowerCase()} suelen convertirse en sobrecostos y retrasos cuando se abordan tarde. La buena noticia: estás a tiempo de cerrarlas antes de comprometer presupuesto.`;
-        } else if (score.total >= 3) {
+        } else if (score.total >= 2) {
             nivel = 'Etapa Temprana';
             color = '#f59e0b';
             headline = `${firstName ? firstName + ', tu' : 'Tu'} proyecto necesita definición antes que código.`;
@@ -2114,7 +2213,7 @@
             desc = `No hay nada de qué avergonzarse: la mayoría de los proyectos exitosos en ${ctx.label.toLowerCase()} pasaron por esta fase. Pero saltarse la definición estratégica para "avanzar rápido" es la causa #1 de proyectos abandonados. Necesitas un proceso de descubrimiento antes que un equipo de desarrollo.`;
         }
 
-        const pct = score.total / 8;
+        const pct = score.total / 6;
         const circumference = 2 * Math.PI * 90;
 
         // ── Score + Gauge ──
@@ -2128,7 +2227,7 @@
                 </svg>
                 <div class="gauge-text">
                     <div class="gauge-score" id="gaugeNum" style="color:${color}">0</div>
-                    <div class="gauge-total">de 8</div>
+                    <div class="gauge-total">de 6</div>
                 </div>
             </div>
             <div class="result-level" style="color:${color}">${nivel}</div>
@@ -2250,9 +2349,9 @@
         const ctaTitle = document.querySelector('#resultsView .result-cta h3');
         const ctaDesc = document.querySelector('#resultsView .result-cta p');
         if (ctaTitle && ctaDesc) {
-            ctaTitle.textContent = score.total >= 7
+            ctaTitle.textContent = score.total >= 5
                 ? '¿Quieres validar tu proyecto con expertos antes de avanzar?'
-                : score.total >= 5
+                : score.total >= 4
                 ? 'Cierra las brechas antes que se conviertan en sobrecostos'
                 : '¿Conversamos cómo estructurar tu proyecto desde cero?';
             ctaDesc.textContent = ctx.cta;
@@ -2346,6 +2445,10 @@
         if (document.getElementById('formView').classList.contains('active')) return;
         if (document.getElementById('resultsView').classList.contains('active')) return;
         if (!document.getElementById('quizView').classList.contains('active')) return;
+        if (onIndustryStep) {
+            if (e.key === 'ArrowLeft') prevQuestion();
+            return;
+        }
 
         if (e.key === '1') {
             const btn = document.querySelector('.btn-si:not(.selected)') || document.querySelector('.btn-si');
