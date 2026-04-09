@@ -804,7 +804,8 @@
             margin-bottom: 8px;
         }
 
-        .form-field input {
+        .form-field input,
+        .form-field select {
             width: 100%;
             padding: 14px 18px;
             background: rgba(255, 255, 255, 0.04);
@@ -814,9 +815,25 @@
             font-family: 'DM Sans', sans-serif;
             font-size: 1rem;
             transition: all var(--transition-snap);
+            appearance: none;
+            -webkit-appearance: none;
         }
 
-        .form-field input:focus {
+        .form-field select {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%2394a3b8' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 18px center;
+            padding-right: 44px;
+            cursor: pointer;
+        }
+
+        .form-field select option {
+            background: #0a1b31;
+            color: var(--white);
+        }
+
+        .form-field input:focus,
+        .form-field select:focus {
             outline: none;
             border-color: var(--blue);
             box-shadow: 0 0 20px var(--blue-glow);
@@ -945,19 +962,132 @@
             margin-top: 4px;
         }
 
+        .industry-tag {
+            display: inline-block;
+            padding: 6px 14px;
+            background: rgba(59, 130, 246, 0.12);
+            border: 1px solid rgba(59, 130, 246, 0.25);
+            border-radius: 100px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem;
+            color: var(--blue-bright);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 24px;
+        }
+
         .result-level {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            margin-bottom: 14px;
+        }
+
+        .result-headline {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: clamp(1.4rem, 3.5vw, 1.8rem);
+            font-size: clamp(1.5rem, 3.8vw, 2.1rem);
             font-weight: 700;
-            margin-bottom: 12px;
+            line-height: 1.25;
+            color: var(--white);
+            max-width: 640px;
+            margin: 0 auto 16px;
+            letter-spacing: -0.01em;
         }
 
         .result-desc {
-            font-size: 1rem;
-            color: var(--slate-400);
-            line-height: 1.7;
-            max-width: 520px;
+            font-size: 1.02rem;
+            color: var(--slate-300);
+            line-height: 1.75;
+            max-width: 600px;
             margin: 0 auto;
+        }
+
+        /* Recognition + Urgency blocks */
+        .insight-block {
+            margin: 36px auto 0;
+            max-width: 720px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .insight-card {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 18px;
+            padding: 22px 24px;
+            text-align: left;
+        }
+
+        .insight-card.recognition {
+            border-color: rgba(16, 185, 129, 0.25);
+            background: linear-gradient(135deg, rgba(16,185,129,0.06), rgba(16,185,129,0.02));
+        }
+
+        .insight-card.urgency {
+            border-color: rgba(244, 63, 94, 0.25);
+            background: linear-gradient(135deg, rgba(244,63,94,0.06), rgba(244,63,94,0.02));
+        }
+
+        .insight-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .insight-card.recognition .insight-label { color: #10b981; }
+        .insight-card.urgency .insight-label { color: #f43f5e; }
+
+        .insight-text {
+            font-size: 0.92rem;
+            color: var(--slate-200);
+            line-height: 1.6;
+        }
+
+        .insight-text strong {
+            color: var(--white);
+            font-weight: 600;
+        }
+
+        @media (max-width: 640px) {
+            .insight-block { grid-template-columns: 1fr; }
+            .result-headline { font-size: 1.4rem; }
+        }
+
+        /* Industry stat banner */
+        .industry-stat {
+            margin: 36px auto 0;
+            max-width: 720px;
+            padding: 22px 26px;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.08), rgba(139, 92, 246, 0.04));
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            border-left: 3px solid var(--blue);
+            border-radius: 0 16px 16px 0;
+            text-align: left;
+        }
+
+        .industry-stat-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.68rem;
+            font-weight: 600;
+            color: var(--blue-bright);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .industry-stat-text {
+            font-size: 0.95rem;
+            color: var(--slate-200);
+            line-height: 1.6;
         }
 
         /* Breakdown */
@@ -1348,14 +1478,14 @@
         <div class="hero-content">
             <div class="hero-eyebrow">
                 <span class="dot"></span>
-                Diagnóstico gratuito · 2 min
+                Diagnóstico gratuito · 90 segundos
             </div>
             <h1 class="hero-title">
                 El 68% de los proyectos de software
                 <span class="highlight">fracasan antes de empezar.</span>
             </h1>
             <p class="hero-desc">
-                No por falta de talento técnico — por falta de definición. Evalúa la madurez de tu proyecto con 10 criterios clave y descubre las brechas que podrían costarte meses de retrabajo. Solo toma 2 minutos.
+                No por falta de talento técnico — por falta de definición. Evalúa la madurez de tu proyecto con 8 criterios clave y descubre las brechas que podrían costarte meses de retrabajo. Solo toma 90 segundos.
             </p>
             <button class="hero-start-btn" onclick="startQuiz()">
                 Evaluar mi proyecto
@@ -1393,7 +1523,7 @@
                         <circle class="ring-fill" id="ringFill" cx="32" cy="32" r="30"/>
                     </svg>
                     <div class="ring-text">
-                        <div class="ring-num" id="ringNum">0/10</div>
+                        <div class="ring-num" id="ringNum">0/8</div>
                     </div>
                 </div>
                 <div class="progress-meta">
@@ -1464,6 +1594,18 @@
                             <input type="text" id="fCargo" placeholder="Tu cargo" required>
                         </div>
                     </div>
+                    <div class="form-field">
+                        <label>Industria</label>
+                        <select id="fIndustria" required>
+                            <option value="" disabled selected>Selecciona tu industria</option>
+                            <option value="seguros">Seguros</option>
+                            <option value="afp">AFP / Pensiones</option>
+                            <option value="banca">Banca y servicios financieros</option>
+                            <option value="telecomunicaciones">Telecomunicaciones</option>
+                            <option value="retail">Retail y e-commerce</option>
+                            <option value="otro">Otra industria</option>
+                        </select>
+                    </div>
                     <button type="submit" class="form-submit-btn">Ver mi diagnóstico</button>
                 </form>
                 <div class="form-privacy">
@@ -1508,7 +1650,7 @@
             service: 'Consultoría estratégica y requerimientos',
             questions: [
                 'Tenemos claro el problema de negocio principal que este software debe resolver.',
-                'Hemos definido indicadores de éxito medibles (ej. reducción de tiempos, mayor eficiencia, eliminación de procesos manuales).'
+                'Hemos definido indicadores de éxito medibles para el proyecto (ej. reducción de tiempos, mayor eficiencia, eliminación de procesos manuales).'
             ]
         },
         {
@@ -1524,7 +1666,7 @@
             icon: '👥', subtitle: '¿Para quién y sobre qué procesos?',
             service: 'Diseño UX y levantamiento de procesos',
             questions: [
-                'Identificamos los roles de usuario y los procesos que el sistema apoyará o reemplazará.'
+                'Los procesos actuales que el sistema apoyará o reemplazará están documentados y son conocidos por el equipo.'
             ]
         },
         {
@@ -1532,7 +1674,7 @@
             icon: '🔗', subtitle: '¿Cómo se conecta con lo existente?',
             service: 'Arquitectura de integraciones',
             questions: [
-                'Sabemos con qué sistemas debe integrarse y si existen APIs o mecanismos de conexión disponibles.'
+                'Identificamos los sistemas con los que el nuevo software deberá conectarse (ERP, CRM, core, APIs externas, etc.).'
             ]
         },
         {
@@ -1540,7 +1682,7 @@
             icon: '🛡️', subtitle: '¿Qué límites tiene el proyecto?',
             service: 'Consultoría técnica y arquitectura',
             questions: [
-                'Conocemos las restricciones de seguridad, privacidad, cumplimiento normativo e infraestructura del proyecto.'
+                'Conocemos las restricciones de seguridad, privacidad y cumplimiento normativo aplicables (ej. CMF, Ley 21.719, ISO 27001).'
             ]
         },
         {
@@ -1548,7 +1690,7 @@
             icon: '🔍', subtitle: 'Si ya existe algo, ¿en qué estado está?',
             service: 'Evaluación de software legacy',
             questions: [
-                'Hemos evaluado si el sistema actual puede evolucionar (refactorizar) o si requiere un reemplazo completo.'
+                'Hemos evaluado si el sistema actual puede evolucionar (refactorizar) o si requiere un reemplazo completo (si aplica).'
             ]
         },
         {
@@ -1556,8 +1698,7 @@
             icon: '⚙️', subtitle: '¿Quién lidera y con qué recursos?',
             service: 'Gestión de proyecto ágil',
             questions: [
-                'Hay un responsable definido del proyecto (Product Owner o equivalente) con disponibilidad real.',
-                'Tenemos un presupuesto estimado y fechas o hitos clave definidos para la entrega.'
+                'Hay un responsable definido del proyecto (Product Owner o equivalente) con disponibilidad real para tomar decisiones.'
             ]
         }
     ];
@@ -1565,7 +1706,7 @@
     // ===== STATE =====
     const answers = {};
     let currentQ = 0;
-    const totalQ = 10;
+    const totalQ = 8;
 
     function getSection(qIndex) {
         let count = 0;
@@ -1573,7 +1714,7 @@
             count += sections[i].questions.length;
             if (qIndex < count) return { section: sections[i], indexInSection: qIndex - (count - sections[i].questions.length) };
         }
-        return { section: sections[6], indexInSection: 3 };
+        return { section: sections[6], indexInSection: 0 };
     }
 
     function getGlobalQ(sectionIdx, qIdx) {
@@ -1804,16 +1945,20 @@
         e.preventDefault();
 
         const score = calculateScore();
+        const industria = document.getElementById('fIndustria').value;
         const formData = {
             nombre: document.getElementById('fNombre').value,
             apellido: document.getElementById('fApellido').value,
             email: document.getElementById('fEmail').value,
             empresa: document.getElementById('fEmpresa').value,
             cargo: document.getElementById('fCargo').value,
+            industria: industria,
             respuestas: { ...answers },
             score: score,
             timestamp: new Date().toISOString()
         };
+        score.industria = industria;
+        score.nombre = document.getElementById('fNombre').value;
 
         // TODO: Enviar a GHL webhook
         // fetch('TU_WEBHOOK_GHL', {
@@ -1922,32 +2067,86 @@
         }
     };
 
+    // ===== INDUSTRY PERSONALIZATION =====
+    const industryContext = {
+        seguros: {
+            label: 'Seguros',
+            stat: 'En seguros, el 73% de las iniciativas de modernización se atrasan por requisitos regulatorios descubiertos tarde (CMF, normativa de continuidad operacional).',
+            painPoint: 'integraciones con sistemas legacy de pólizas, siniestros y reaseguro',
+            peers: 'compañías de seguros chilenas que han modernizado sus plataformas core',
+            cta: 'Conversemos sobre cómo abordar tu proyecto sin frenar las operaciones diarias.'
+        },
+        afp: {
+            label: 'AFP / Pensiones',
+            stat: 'Las AFP enfrentan exigencias crecientes de la Superintendencia de Pensiones y la Reforma Previsional — la trazabilidad y compliance ya no son opcionales.',
+            painPoint: 'la integración con el sistema previsional, trazabilidad de afiliados y cumplimiento normativo estricto',
+            peers: 'AFPs y administradoras previsionales en proceso de modernización',
+            cta: 'Hablemos de cómo estructurar tu proyecto cumpliendo los marcos regulatorios desde el día uno.'
+        },
+        banca: {
+            label: 'Banca y servicios financieros',
+            stat: 'En banca, cada semana de retraso en un proyecto core cuesta en promedio entre USD 80K y 250K en oportunidad y costos directos — y el 60% se atribuye a requisitos mal definidos.',
+            painPoint: 'integraciones con core bancario, cumplimiento CMF, ciberseguridad y trazabilidad transaccional',
+            peers: 'bancos y fintechs reguladas en Chile y Latam',
+            cta: 'Coordinemos una sesión para revisar tu caso con foco en tiempo, riesgo regulatorio y go-to-market.'
+        },
+        telecomunicaciones: {
+            label: 'Telecomunicaciones',
+            stat: 'En telco, el time-to-market es el activo crítico: cada mes de retraso en un nuevo producto digital puede significar perder ventajas competitivas frente a operadores más ágiles.',
+            painPoint: 'la integración con BSS/OSS, billing, CRM y plataformas de provisioning',
+            peers: 'operadores y empresas telco en procesos de transformación digital',
+            cta: 'Agendemos para revisar cómo acelerar tu proyecto sin sacrificar estabilidad operacional.'
+        },
+        retail: {
+            label: 'Retail y e-commerce',
+            stat: 'En retail, el 58% de los proyectos de software fallan en la temporada alta porque escalaron mal o se subestimaron las integraciones con ERP, WMS y pasarelas.',
+            painPoint: 'integraciones con ERP, WMS, marketplaces y plataformas de pago',
+            peers: 'retailers omnicanal y players de e-commerce en Chile y Latam',
+            cta: 'Hablemos de cómo asegurar que tu proyecto esté listo antes de la próxima temporada alta.'
+        },
+        otro: {
+            label: 'tu industria',
+            stat: 'Independiente del sector, los proyectos de software con definición incompleta tienen 2.5x más probabilidades de exceder presupuesto y plazos.',
+            painPoint: 'las integraciones con tus sistemas existentes y los procesos críticos del negocio',
+            peers: 'empresas que han enfrentado este mismo punto de inflexión',
+            cta: 'Conversemos sobre cómo abordar tu caso específico con una hoja de ruta clara.'
+        }
+    };
+
     // ===== RENDER RESULTS =====
     function renderResults(score) {
-        let nivel, desc, color;
-        if (score.total >= 8) {
+        const ctx = industryContext[score.industria] || industryContext.otro;
+        const firstName = (score.nombre || '').split(' ')[0] || '';
+        let nivel, desc, color, headline;
+
+        if (score.total >= 7) {
             nivel = 'Proyecto Maduro';
             color = '#10b981';
-            desc = 'Tu proyecto está bien definido y listo para iniciar el desarrollo con alta predictibilidad. Las brechas menores pueden cerrarse en paralelo al inicio del proyecto.';
+            headline = `${firstName ? firstName + ', tu' : 'Tu'} proyecto está mejor definido que el 80% de los que llegan a desarrollo.`;
+            desc = `Tienes una base sólida para avanzar con alta predictibilidad. En ${ctx.label.toLowerCase()}, esto te pone en una posición privilegiada: las brechas menores que detectamos pueden cerrarse en paralelo al inicio del proyecto sin perder velocidad.`;
         } else if (score.total >= 5) {
             nivel = 'En Proceso de Definición';
             color = '#3b82f6';
-            desc = 'Tienes una base sólida pero existen brechas que, si no se cierran antes de desarrollar, generarán retrabajo y sobrecostos. La buena noticia: son resolubles con el acompañamiento correcto.';
+            headline = `${firstName ? firstName + ', tienes' : 'Tienes'} una buena base — pero hay brechas que, si no se cierran ahora, te van a costar caro después.`;
+            desc = `Tu proyecto tiene fundamentos, pero existen áreas que en ${ctx.label.toLowerCase()} suelen convertirse en sobrecostos y retrasos cuando se abordan tarde. La buena noticia: estás a tiempo de cerrarlas antes de comprometer presupuesto.`;
         } else if (score.total >= 3) {
             nivel = 'Etapa Temprana';
             color = '#f59e0b';
-            desc = 'Tu proyecto necesita trabajo significativo en definición antes de escribir una línea de código. Invertir en esta etapa ahora te ahorrará meses de retrabajo después.';
+            headline = `${firstName ? firstName + ', tu' : 'Tu'} proyecto necesita definición antes que código.`;
+            desc = `Hay claridad en algunos puntos, pero faltan pilares clave. En ${ctx.label.toLowerCase()}, lanzar desarrollo en este estado típicamente significa rehacer entre el 30% y 50% del trabajo. Invertir 4-6 semanas ahora en definición te ahorra meses de retrabajo.`;
         } else {
             nivel = 'Idea Inicial';
             color = '#f43f5e';
-            desc = 'El proyecto está en fase conceptual. Necesitas un proceso de descubrimiento y definición estratégica antes de pensar en desarrollo. Esto no es malo — es el punto de partida correcto.';
+            headline = `${firstName ? firstName + ', tu' : 'Tu'} proyecto está en fase conceptual — y eso es un buen punto de partida.`;
+            desc = `No hay nada de qué avergonzarse: la mayoría de los proyectos exitosos en ${ctx.label.toLowerCase()} pasaron por esta fase. Pero saltarse la definición estratégica para "avanzar rápido" es la causa #1 de proyectos abandonados. Necesitas un proceso de descubrimiento antes que un equipo de desarrollo.`;
         }
 
-        const pct = score.total / 10;
+        const pct = score.total / 8;
         const circumference = 2 * Math.PI * 90;
 
         // ── Score + Gauge ──
         document.getElementById('scoreReveal').innerHTML = `
+            <div class="industry-tag">Diagnóstico para ${ctx.label}</div>
             <div class="gauge-container">
                 <svg class="gauge-svg" viewBox="0 0 200 200">
                     <circle class="gauge-bg" cx="100" cy="100" r="90"/>
@@ -1956,10 +2155,11 @@
                 </svg>
                 <div class="gauge-text">
                     <div class="gauge-score" id="gaugeNum" style="color:${color}">0</div>
-                    <div class="gauge-total">de 10</div>
+                    <div class="gauge-total">de 8</div>
                 </div>
             </div>
             <div class="result-level" style="color:${color}">${nivel}</div>
+            <h2 class="result-headline">${headline}</h2>
             <p class="result-desc">${desc}</p>
         `;
 
@@ -1989,9 +2189,43 @@
                 </div>`;
         }).join('');
 
-        // ── Gap Alert (biggest gap) ──
-        const worstSection = [...score.sections].sort((a, b) => a.pct - b.pct)[0];
+        // ── Recognition + Urgency block ──
+        const sortedAsc = [...score.sections].sort((a, b) => a.pct - b.pct);
+        const worstSection = sortedAsc[0];
+        const bestSection = [...score.sections].sort((a, b) => b.pct - a.pct)[0];
         const worstDiag = diagnostics[worstSection.name];
+        const bestDiag = diagnostics[bestSection.name];
+
+        const recognitionText = bestSection.pct >= 75
+            ? `Tu mayor fortaleza está en <strong>${bestSection.name}</strong>. Esto es valioso: significa que tu equipo ya ha hecho el trabajo difícil en esa dimensión y puedes apoyarte en eso para acelerar el resto.`
+            : `Aún en proyectos en etapa temprana, identificamos que tu equipo tiene mayor avance relativo en <strong>${bestSection.name}</strong>. Es el punto desde donde construir.`;
+
+        const urgencyText = worstSection.pct < 75
+            ? `Tu brecha más crítica es <strong>${worstSection.name}</strong>. ${worstDiag.risk} Para ${ctx.label.toLowerCase()}, esta brecha cobra especial relevancia por ${ctx.painPoint}.`
+            : `Todas tus áreas están sobre el umbral mínimo. El siguiente paso es asegurar la coherencia y profundidad de los detalles antes de comprometer recursos.`;
+
+        const insightHtml = `
+            <div class="insight-block">
+                <div class="insight-card recognition">
+                    <div class="insight-label">✓ Lo que tienes a favor</div>
+                    <div class="insight-text">${recognitionText}</div>
+                </div>
+                <div class="insight-card urgency">
+                    <div class="insight-label">⚠ Lo que necesitas atender</div>
+                    <div class="insight-text">${urgencyText}</div>
+                </div>
+            </div>
+        `;
+
+        // ── Industry stat ──
+        const industryStatHtml = `
+            <div class="industry-stat">
+                <div class="industry-stat-label">Contexto de ${ctx.label}</div>
+                <div class="industry-stat-text">${ctx.stat}</div>
+            </div>
+        `;
+
+        // ── Gap Alert (biggest gap) ──
         const gapAlertHtml = worstSection.pct < 75 ? `
             <div class="gap-alert">
                 <div class="gap-alert-icon">${worstDiag.icon}</div>
@@ -2026,6 +2260,8 @@
 
         // ── Compose breakdown ──
         document.getElementById('breakdown').innerHTML = `
+            ${insightHtml}
+            ${industryStatHtml}
             <div class="radar-section">
                 <div class="radar-container">${radarSvg}</div>
                 <div class="radar-legend">${legendHtml}</div>
@@ -2036,6 +2272,18 @@
                 <div class="diagnosis-cards">${diagCardsHtml}</div>
             </div>
         `;
+
+        // ── Personalized CTA copy ──
+        const ctaTitle = document.querySelector('#resultsView .result-cta h3');
+        const ctaDesc = document.querySelector('#resultsView .result-cta p');
+        if (ctaTitle && ctaDesc) {
+            ctaTitle.textContent = score.total >= 7
+                ? '¿Quieres validar tu proyecto con expertos antes de avanzar?'
+                : score.total >= 5
+                ? 'Cierra las brechas antes que se conviertan en sobrecostos'
+                : '¿Conversamos cómo estructurar tu proyecto desde cero?';
+            ctaDesc.textContent = ctx.cta;
+        }
     }
 
     // ===== RADAR CHART BUILDER =====
