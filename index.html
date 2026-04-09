@@ -1570,41 +1570,17 @@
             </div>
             <div class="form-card">
                 <form id="leadForm" onsubmit="submitForm(event)">
-                    <div class="form-row">
-                        <div class="form-field">
-                            <label>Nombre</label>
-                            <input type="text" id="fNombre" placeholder="Tu nombre" required>
-                        </div>
-                        <div class="form-field">
-                            <label>Apellido</label>
-                            <input type="text" id="fApellido" placeholder="Tu apellido" required>
-                        </div>
+                    <div class="form-field">
+                        <label>Nombre completo</label>
+                        <input type="text" id="fNombre" placeholder="Nombre y apellido" required>
                     </div>
                     <div class="form-field">
-                        <label>Email corporativo</label>
+                        <label>Email</label>
                         <input type="email" id="fEmail" placeholder="tu@empresa.com" required>
                     </div>
-                    <div class="form-row">
-                        <div class="form-field">
-                            <label>Empresa</label>
-                            <input type="text" id="fEmpresa" placeholder="Nombre de tu empresa" required>
-                        </div>
-                        <div class="form-field">
-                            <label>Cargo</label>
-                            <input type="text" id="fCargo" placeholder="Tu cargo" required>
-                        </div>
-                    </div>
                     <div class="form-field">
-                        <label>Industria</label>
-                        <select id="fIndustria" required>
-                            <option value="" disabled selected>Selecciona tu industria</option>
-                            <option value="seguros">Seguros</option>
-                            <option value="afp">AFP / Pensiones</option>
-                            <option value="banca">Banca y servicios financieros</option>
-                            <option value="telecomunicaciones">Telecomunicaciones</option>
-                            <option value="retail">Retail y e-commerce</option>
-                            <option value="otro">Otra industria</option>
-                        </select>
+                        <label>Teléfono</label>
+                        <input type="tel" id="fTelefono" placeholder="+56 9 1234 5678" required>
                     </div>
                     <button type="submit" class="form-submit-btn">Ver mi diagnóstico</button>
                 </form>
@@ -1945,20 +1921,17 @@
         e.preventDefault();
 
         const score = calculateScore();
-        const industria = document.getElementById('fIndustria').value;
+        const nombre = document.getElementById('fNombre').value;
         const formData = {
-            nombre: document.getElementById('fNombre').value,
-            apellido: document.getElementById('fApellido').value,
+            nombre: nombre,
             email: document.getElementById('fEmail').value,
-            empresa: document.getElementById('fEmpresa').value,
-            cargo: document.getElementById('fCargo').value,
-            industria: industria,
+            telefono: document.getElementById('fTelefono').value,
             respuestas: { ...answers },
             score: score,
             timestamp: new Date().toISOString()
         };
-        score.industria = industria;
-        score.nombre = document.getElementById('fNombre').value;
+        score.industria = 'otro';
+        score.nombre = nombre;
 
         // TODO: Enviar a GHL webhook
         // fetch('TU_WEBHOOK_GHL', {
