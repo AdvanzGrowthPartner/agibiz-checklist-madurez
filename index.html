@@ -578,6 +578,229 @@
             .industry-chips { grid-template-columns: 1fr; }
         }
 
+        /* Contact input step (nombre, email, tel in quiz) */
+        .contact-input-wrap {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            max-width: 440px;
+            margin: 0 auto;
+        }
+
+        .contact-input {
+            width: 100%;
+            padding: 18px 22px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid var(--glass-border);
+            border-radius: 16px;
+            color: var(--white);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1.15rem;
+            text-align: center;
+            transition: all var(--transition-snap);
+        }
+
+        .contact-input:focus {
+            outline: none;
+            border-color: var(--blue);
+            box-shadow: 0 0 24px var(--blue-glow);
+        }
+
+        .contact-input::placeholder {
+            color: var(--slate-500);
+        }
+
+        .contact-sublabel {
+            font-size: 0.82rem;
+            color: var(--slate-500);
+            line-height: 1.5;
+        }
+
+        /* Comparison chart (Tú vs Mercado) */
+        .compare-section {
+            margin: 40px auto 0;
+            max-width: 720px;
+        }
+
+        .compare-section h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 6px;
+        }
+
+        .compare-subtitle {
+            font-size: 0.82rem;
+            color: var(--slate-500);
+            margin-bottom: 24px;
+        }
+
+        .compare-rows {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .cr-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 8px;
+        }
+
+        .cr-name {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            font-size: 0.88rem;
+            color: var(--white);
+        }
+
+        .cr-vals {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem;
+            display: flex;
+            gap: 12px;
+        }
+
+        .cv-market { color: var(--slate-400); }
+        .cv-client-ok { color: #10b981; }
+        .cv-client-gap { color: #f43f5e; }
+
+        .cr-track {
+            position: relative;
+            height: 28px;
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 100px;
+            overflow: hidden;
+        }
+
+        .cr-bar-market {
+            position: absolute;
+            top: 0; left: 0;
+            height: 100%;
+            background: rgba(148, 163, 184, 0.18);
+            border-right: 2px dashed rgba(148, 163, 184, 0.5);
+            border-radius: 100px 0 0 100px;
+            transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .cr-bar-market-label {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            right: 8px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.62rem;
+            color: var(--slate-400);
+            white-space: nowrap;
+        }
+
+        .cr-bar-client {
+            position: absolute;
+            top: 0; left: 0;
+            height: 100%;
+            border-radius: 100px;
+            transition: width 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .cr-bar-client.above { background: linear-gradient(90deg, rgba(16,185,129,0.35), rgba(16,185,129,0.55)); }
+        .cr-bar-client.below { background: linear-gradient(90deg, rgba(244,63,94,0.35), rgba(244,63,94,0.55)); }
+        .cr-bar-client.equal { background: linear-gradient(90deg, rgba(59,130,246,0.35), rgba(59,130,246,0.55)); }
+
+        .cr-gap-tag {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            right: 8px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.68rem;
+            font-weight: 600;
+            color: var(--white);
+            opacity: 0.9;
+        }
+
+        /* Legend */
+        .compare-legend {
+            display: flex;
+            gap: 20px;
+            margin-top: 16px;
+            justify-content: center;
+        }
+
+        .cl-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.75rem;
+            color: var(--slate-400);
+        }
+
+        .cl-swatch {
+            width: 14px;
+            height: 8px;
+            border-radius: 4px;
+        }
+
+        .cl-swatch.market { background: rgba(148, 163, 184, 0.35); }
+        .cl-swatch.client { background: rgba(59, 130, 246, 0.55); }
+
+        /* Economic callout */
+        .economic-callout {
+            margin: 40px auto 0;
+            max-width: 720px;
+            background: linear-gradient(135deg, rgba(244, 63, 94, 0.08), rgba(249, 115, 22, 0.05));
+            border: 1px solid rgba(244, 63, 94, 0.2);
+            border-radius: 20px;
+            padding: 32px 36px;
+            text-align: center;
+        }
+
+        .econ-icon {
+            font-size: 2.2rem;
+            margin-bottom: 12px;
+        }
+
+        .econ-header {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 16px;
+        }
+
+        .econ-amount {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: clamp(1.8rem, 5vw, 2.6rem);
+            font-weight: 700;
+            color: #f43f5e;
+            margin-bottom: 10px;
+            letter-spacing: -0.5px;
+        }
+
+        .econ-label {
+            font-size: 0.85rem;
+            color: var(--slate-300);
+            line-height: 1.6;
+            max-width: 540px;
+            margin: 0 auto 20px;
+        }
+
+        .econ-time {
+            padding: 12px 18px;
+            background: rgba(244, 63, 94, 0.08);
+            border-radius: 12px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.78rem;
+            color: #fda4af;
+            display: inline-block;
+        }
+
+        @media (max-width: 640px) {
+            .economic-callout { padding: 24px 20px; }
+            .cr-bar-market-label { display: none; }
+        }
+
         /* Answer buttons */
         .answers {
             display: flex;
@@ -1573,7 +1796,7 @@
                         <circle class="ring-fill" id="ringFill" cx="32" cy="32" r="30"/>
                     </svg>
                     <div class="ring-text">
-                        <div class="ring-num" id="ringNum">0/7</div>
+                        <div class="ring-num" id="ringNum">0/10</div>
                     </div>
                 </div>
                 <div class="progress-meta">
@@ -1608,39 +1831,7 @@
         </div>
     </div>
 
-    <!-- ===== FORM VIEW ===== -->
-    <div class="view" id="formView">
-        <div class="form-wrapper">
-            <div class="form-header">
-                <div class="check-anim">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
-                </div>
-                <h2>Checklist completado</h2>
-                <p>Ingresa tus datos para ver tu diagnóstico y recibirlo por correo con recomendaciones.</p>
-            </div>
-            <div class="form-card">
-                <form id="leadForm" onsubmit="submitForm(event)">
-                    <div class="form-field">
-                        <label>Nombre completo</label>
-                        <input type="text" id="fNombre" placeholder="Nombre y apellido" required>
-                    </div>
-                    <div class="form-field">
-                        <label>Email</label>
-                        <input type="email" id="fEmail" placeholder="tu@empresa.com" required>
-                    </div>
-                    <div class="form-field">
-                        <label>Teléfono</label>
-                        <input type="tel" id="fTelefono" placeholder="+56 9 1234 5678" required>
-                    </div>
-                    <button type="submit" class="form-submit-btn">Ver mi diagnóstico</button>
-                </form>
-                <div class="form-privacy">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
-                    Tus datos están seguros. No compartimos tu información.
-                </div>
-            </div>
-        </div>
-    </div>
+    <!-- Form view removed — contact fields are now part of the quiz flow -->
 
     <!-- ===== RESULTS VIEW ===== -->
     <div class="view" id="resultsView">
@@ -1719,9 +1910,35 @@
     const answers = {};
     let currentQ = 0;
     const totalQ = 6;
-    const totalSteps = totalQ + 1; // +1 industria
     let industrySelected = null;
     let onIndustryStep = false;
+    let contactPhase = null; // null, 0=nombre, 1=email, 2=telefono
+    const contact = { nombre: '', email: '', telefono: '' };
+    const contactSteps = [
+        { field: 'nombre', label: '¿Cómo te llamas?', sublabel: 'Para personalizar tu diagnóstico.', placeholder: 'Nombre y apellido', input: 'text', autocomplete: 'name' },
+        { field: 'email', label: '¿A qué email corporativo enviamos tu diagnóstico?', sublabel: 'Te enviaremos el reporte completo y un resumen ejecutivo.', placeholder: 'tu@empresa.com', input: 'email', autocomplete: 'email' },
+        { field: 'telefono', label: '¿A qué teléfono podemos contactarte?', sublabel: 'Solo si decides agendar una sesión con nuestros expertos.', placeholder: '+56 9 1234 5678', input: 'tel', autocomplete: 'tel' }
+    ];
+    const totalSteps = 1 + totalQ + contactSteps.length; // industria + diagnóstico + contacto = 10
+
+    // ===== MARKET BENCHMARKS (avg madurez por sección, 0-1) =====
+    const marketAverage = {
+        'Propósito y Visión': 0.62,
+        'Alcance y Funcionalidades': 0.48,
+        'Usuarios y Procesos': 0.41,
+        'Restricciones Técnicas': 0.55,
+        'Gobernanza y Recursos': 0.52
+    };
+
+    // Tamaño promedio de proyecto por industria (USD) — para cálculo de impacto económico
+    const avgProjectSize = {
+        seguros: 250000,
+        banca: 380000,
+        afp: 220000,
+        telecomunicaciones: 280000,
+        retail: 180000,
+        otro: 200000
+    };
 
     function getSection(qIndex) {
         let count = 0;
@@ -1759,15 +1976,82 @@
         currentQ = 0;
         industrySelected = null;
         onIndustryStep = true;
-        // limpiar respuestas previas
+        contactPhase = null;
+        contact.nombre = '';
+        contact.email = '';
+        contact.telefono = '';
         Object.keys(answers).forEach(k => delete answers[k]);
         renderIndustryStep();
         switchView('heroView', 'quizView');
     }
 
+    // ===== CONTACT STEP =====
+    function renderContactStep(phaseIdx, direction) {
+        contactPhase = phaseIdx;
+        onIndustryStep = false;
+        const cfg = contactSteps[phaseIdx];
+        const stepNum = 1 + totalQ + phaseIdx + 1; // 8, 9, 10
+        const stage = document.getElementById('questionStage');
+        const currentVal = contact[cfg.field] || '';
+        const enterAnim = direction === 'backward' ? 'cardSlideInReverse' : 'cardSlideIn';
+
+        stage.innerHTML = `
+            <div class="q-card q-card-enter ${currentVal ? 'has-answer' : ''}" style="animation-name: ${enterAnim}">
+                <div class="q-number">PREGUNTA ${stepNum} DE ${totalSteps}</div>
+                <div class="q-text">${cfg.label}</div>
+                <div class="contact-input-wrap">
+                    <input class="contact-input" type="${cfg.input}" id="contactInput" placeholder="${cfg.placeholder}" value="${currentVal}" autocomplete="${cfg.autocomplete}" />
+                    <div class="contact-sublabel">${cfg.sublabel}</div>
+                </div>
+            </div>
+        `;
+
+        const input = document.getElementById('contactInput');
+        setTimeout(() => input.focus(), 50);
+
+        function validate() {
+            const val = (input.value || '').trim();
+            let ok = val.length > 1;
+            if (cfg.input === 'email') ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
+            if (cfg.input === 'tel') ok = val.replace(/\D/g, '').length >= 7;
+            document.getElementById('btnNext').disabled = !ok;
+            return ok;
+        }
+
+        input.addEventListener('input', () => {
+            contact[cfg.field] = input.value.trim();
+            validate();
+            updateProgressUI();
+        });
+
+        input.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                if (validate()) nextQuestion();
+            }
+        });
+
+        validate();
+
+        document.getElementById('sectionIndicator').textContent = `PASO ${stepNum} DE ${totalSteps}`;
+        document.getElementById('sectionName').innerHTML = `<span class="section-accent accent-1"></span>Tus datos de contacto`;
+        document.getElementById('btnPrev').style.visibility = 'visible';
+        document.getElementById('btnNext').style.visibility = 'visible';
+
+        const btn = document.getElementById('btnNext');
+        if (phaseIdx === contactSteps.length - 1) {
+            btn.innerHTML = 'Ver mi diagnóstico <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>';
+        } else {
+            btn.innerHTML = 'Siguiente <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
+        }
+
+        updateProgressUI();
+    }
+
     // ===== INDUSTRY STEP =====
     function renderIndustryStep() {
         onIndustryStep = true;
+        contactPhase = null;
         const stage = document.getElementById('questionStage');
         const options = [
             { val: 'seguros', icon: '🛡️', label: 'Seguros' },
@@ -1872,6 +2156,7 @@
     // ===== RENDER QUESTION =====
     function renderQuestion(qIndex, direction) {
         onIndustryStep = false;
+        contactPhase = null;
         const { section, indexInSection } = getSection(qIndex);
         const qText = section.questions[indexInSection];
         const qNum = qIndex + 2; // industria es paso 1
@@ -1917,14 +2202,8 @@
         // Nav buttons (siempre se puede volver a la industria)
         document.getElementById('btnPrev').style.visibility = 'visible';
 
-        const isLast = qIndex === totalQ - 1;
         const btn = document.getElementById('btnNext');
-        if (isLast) {
-            btn.textContent = 'Finalizar';
-            btn.innerHTML = 'Finalizar <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>';
-        } else {
-            btn.innerHTML = 'Siguiente <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
-        }
+        btn.innerHTML = 'Siguiente <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
         btn.disabled = !selectedAnswer;
         btn.style.visibility = '';
 
@@ -1963,34 +2242,62 @@
 
         updateProgressUI();
 
-        // Auto-advance after short delay
+        // Auto-advance after short delay (incluso en la última pregunta → contacto)
         setTimeout(() => {
-            if (currentQ < totalQ - 1) {
-                nextQuestion();
-            }
+            nextQuestion();
         }, 500);
     }
 
     // ===== NAVIGATION =====
     function nextQuestion() {
-        if (!answers[currentQ]) return;
-
-        const nextIdx = currentQ + 1;
-
-        if (nextIdx >= totalQ) {
-            switchView('quizView', 'formView');
+        // Industry → first diagnostic
+        if (onIndustryStep) {
+            if (!industrySelected) return;
+            onIndustryStep = false;
+            currentQ = 0;
+            renderQuestion(0, 'forward');
             return;
         }
 
+        // Contact phase
+        if (contactPhase !== null) {
+            if (contactPhase < contactSteps.length - 1) {
+                renderContactStep(contactPhase + 1, 'forward');
+            } else {
+                submitFlow();
+            }
+            return;
+        }
+
+        // Diagnostic question
+        if (!answers[currentQ]) return;
+        const nextIdx = currentQ + 1;
+        if (nextIdx >= totalQ) {
+            renderContactStep(0, 'forward');
+            return;
+        }
         currentQ = nextIdx;
         renderQuestion(currentQ, 'forward');
     }
 
     function prevQuestion() {
+        if (onIndustryStep) return;
+
+        if (contactPhase !== null) {
+            if (contactPhase > 0) {
+                renderContactStep(contactPhase - 1, 'backward');
+            } else {
+                contactPhase = null;
+                currentQ = totalQ - 1;
+                renderQuestion(currentQ, 'backward');
+            }
+            return;
+        }
+
         if (currentQ > 0) {
             currentQ--;
             renderQuestion(currentQ, 'backward');
-        } else if (!onIndustryStep) {
+        } else {
             renderIndustryStep();
         }
     }
@@ -1998,7 +2305,10 @@
     // ===== UPDATE PROGRESS UI =====
     function updateProgressUI() {
         const answered = Object.keys(answers).length;
-        const totalAnswered = answered + (industrySelected ? 1 : 0);
+        let totalAnswered = answered + (industrySelected ? 1 : 0);
+        if (contact.nombre) totalAnswered++;
+        if (contact.email && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contact.email)) totalAnswered++;
+        if (contact.telefono && contact.telefono.replace(/\D/g, '').length >= 7) totalAnswered++;
         const pct = totalAnswered / totalSteps;
         const circumference = 2 * Math.PI * 30; // r=30
         const offset = circumference * (1 - pct);
@@ -2014,23 +2324,21 @@
         document.getElementById('ringNum').textContent = `${totalAnswered}/${totalSteps}`;
     }
 
-    // ===== SUBMIT FORM =====
-    function submitForm(e) {
-        e.preventDefault();
-
+    // ===== SUBMIT FLOW =====
+    function submitFlow() {
         const score = calculateScore();
-        const nombre = document.getElementById('fNombre').value;
+        score.industria = industrySelected || 'otro';
+        score.nombre = contact.nombre;
+
         const formData = {
-            nombre: nombre,
-            email: document.getElementById('fEmail').value,
-            telefono: document.getElementById('fTelefono').value,
-            industria: industrySelected || 'otro',
+            nombre: contact.nombre,
+            email: contact.email,
+            telefono: contact.telefono,
+            industria: score.industria,
             respuestas: { ...answers },
             score: score,
             timestamp: new Date().toISOString()
         };
-        score.industria = industrySelected || 'otro';
-        score.nombre = nombre;
 
         // TODO: Enviar a GHL webhook
         // fetch('TU_WEBHOOK_GHL', {
@@ -2043,7 +2351,7 @@
         fireMetaEvent('Lead', { content_name: 'Checklist Madurez', score: score.total });
 
         renderResults(score);
-        switchView('formView', 'resultsView');
+        switchView('quizView', 'resultsView');
     }
 
     // ===== CALCULATE SCORE =====
@@ -2261,33 +2569,69 @@
                 </div>`;
         }).join('');
 
-        // ── Recognition + Urgency block ──
-        const sortedAsc = [...score.sections].sort((a, b) => a.pct - b.pct);
-        const worstSection = sortedAsc[0];
-        const bestSection = [...score.sections].sort((a, b) => b.pct - a.pct)[0];
-        const worstDiag = diagnostics[worstSection.name];
-        const bestDiag = diagnostics[bestSection.name];
+        // ── Comparison chart: Client vs Market ──
+        const clientAvgPct = score.sections.reduce((s, sec) => s + sec.pct, 0) / score.sections.length;
+        const marketAvgPct = score.sections.reduce((s, sec) => s + ((marketAverage[sec.name] || 0.5) * 100), 0) / score.sections.length;
+        const gapPts = Math.round(marketAvgPct - clientAvgPct);
 
-        const recognitionText = bestSection.pct >= 75
-            ? `Tu mayor fortaleza está en <strong>${bestSection.name}</strong>. Esto es valioso: significa que tu equipo ya ha hecho el trabajo difícil en esa dimensión y puedes apoyarte en eso para acelerar el resto.`
-            : `Aún en proyectos en etapa temprana, identificamos que tu equipo tiene mayor avance relativo en <strong>${bestSection.name}</strong>. Es el punto desde donde construir.`;
+        const compareRowsHtml = score.sections.map((sec, i) => {
+            const mkt = Math.round((marketAverage[sec.name] || 0.5) * 100);
+            const cli = sec.pct;
+            const diff = cli - mkt;
+            const barClass = diff >= 0 ? 'above' : 'below';
+            const diffLabel = diff >= 0 ? `+${diff}` : `${diff}`;
+            const clientColorClass = diff >= 0 ? 'cv-client-ok' : 'cv-client-gap';
+            return `
+                <div class="compare-row-item">
+                    <div class="cr-header">
+                        <span class="cr-name">${sec.name}</span>
+                        <span class="cr-vals">
+                            <span class="${clientColorClass}">Tú ${cli}%</span>
+                            <span class="cv-market">Mercado ${mkt}%</span>
+                        </span>
+                    </div>
+                    <div class="cr-track">
+                        <div class="cr-bar-market" style="width: ${mkt}%">
+                            <span class="cr-bar-market-label">Promedio</span>
+                        </div>
+                        <div class="cr-bar-client ${barClass}" style="width: ${cli}%">
+                            <span class="cr-gap-tag">${diffLabel}pts</span>
+                        </div>
+                    </div>
+                </div>`;
+        }).join('');
 
-        const urgencyText = worstSection.pct < 75
-            ? `Tu brecha más crítica es <strong>${worstSection.name}</strong>. ${worstDiag.risk} Para ${ctx.label.toLowerCase()}, esta brecha cobra especial relevancia por ${ctx.painPoint}.`
-            : `Todas tus áreas están sobre el umbral mínimo. El siguiente paso es asegurar la coherencia y profundidad de los detalles antes de comprometer recursos.`;
-
-        const insightHtml = `
-            <div class="insight-block">
-                <div class="insight-card recognition">
-                    <div class="insight-label">✓ Lo que tienes a favor</div>
-                    <div class="insight-text">${recognitionText}</div>
-                </div>
-                <div class="insight-card urgency">
-                    <div class="insight-label">⚠ Lo que necesitas atender</div>
-                    <div class="insight-text">${urgencyText}</div>
+        const compareHtml = `
+            <div class="compare-section">
+                <h3>Tu proyecto vs el promedio del mercado</h3>
+                <p class="compare-subtitle">Benchmarks basados en análisis de proyectos de software en empresas de LATAM (2023-2025).</p>
+                <div class="compare-rows">${compareRowsHtml}</div>
+                <div class="compare-legend">
+                    <div class="cl-item"><div class="cl-swatch client"></div> Tu nivel</div>
+                    <div class="cl-item"><div class="cl-swatch market"></div> Promedio del mercado</div>
                 </div>
             </div>
         `;
+
+        // ── Economic impact callout ──
+        const projSize = avgProjectSize[score.industria] || avgProjectSize.otro;
+        const defGap = Math.max(0, 1 - (clientAvgPct / 100)); // 0-1 what's missing
+        const reworkLow = Math.round(projSize * defGap * 0.20 / 1000) * 1000;
+        const reworkHigh = Math.round(projSize * defGap * 0.45 / 1000) * 1000;
+        const fmtLow = reworkLow >= 1000 ? (reworkLow / 1000).toLocaleString('es-CL') + 'K' : reworkLow.toLocaleString('es-CL');
+        const fmtHigh = reworkHigh >= 1000 ? (reworkHigh / 1000).toLocaleString('es-CL') + 'K' : reworkHigh.toLocaleString('es-CL');
+
+        const economicHtml = reworkLow > 0 ? `
+            <div class="economic-callout">
+                <div class="econ-icon">💸</div>
+                <div class="econ-header">El costo de no actuar</div>
+                <div class="econ-amount">USD ${fmtLow} — ${fmtHigh}</div>
+                <div class="econ-label">
+                    Estimación del sobrecosto por retrabajo en un proyecto típico de ${ctx.label.toLowerCase()}, dado tu nivel actual de definición${gapPts > 0 ? ` (${gapPts} puntos bajo el promedio del mercado)` : ''}.
+                </div>
+                <div class="econ-time">Cada mes sin cerrar estas brechas, el costo aumenta entre 8% y 12%</div>
+            </div>
+        ` : '';
 
         // ── Industry stat ──
         const industryStatHtml = `
@@ -2297,52 +2641,15 @@
             </div>
         `;
 
-        // ── Gap Alert (biggest gap) ──
-        const gapAlertHtml = worstSection.pct < 75 ? `
-            <div class="gap-alert">
-                <div class="gap-alert-icon">${worstDiag.icon}</div>
-                <div>
-                    <h4>Brecha principal: ${worstSection.name}</h4>
-                    <p>${worstDiag.risk}</p>
-                </div>
-            </div>` : '';
-
-        // ── Diagnosis Cards ──
-        const diagCardsHtml = score.sections.map((sec, i) => {
-            const diag = diagnostics[sec.name];
-            const diagText = sec.pct >= 75 ? diag.high : sec.pct >= 50 ? diag.mid : diag.low;
-            const bgColor = sectionColors[i];
-            const scoreColor = sec.pct >= 75 ? '#10b981' : sec.pct >= 50 ? '#f59e0b' : '#f43f5e';
-            const scoreBg = sec.pct >= 75 ? 'rgba(16,185,129,0.12)' : sec.pct >= 50 ? 'rgba(249,115,22,0.12)' : 'rgba(244,63,94,0.12)';
-            const isGap = sec.pct < 75;
-            const recHtml = isGap ? `<div class="diag-recommendation">${diag.action}</div>` : '';
-            return `
-                <div class="diag-card ${isGap ? 'gap-card' : ''}">
-                    <div class="diag-top">
-                        <div class="diag-icon" style="background:${bgColor}20">${diag.icon}</div>
-                        <div class="diag-header">
-                            <div class="diag-name">${sec.name}</div>
-                        </div>
-                        <div class="diag-score-badge" style="background:${scoreBg};color:${scoreColor}">${sec.si}/${sec.total}</div>
-                    </div>
-                    <div class="diag-text">${diagText}</div>
-                    ${recHtml}
-                </div>`;
-        }).join('');
-
         // ── Compose breakdown ──
         document.getElementById('breakdown').innerHTML = `
-            ${insightHtml}
             ${industryStatHtml}
             <div class="radar-section">
                 <div class="radar-container">${radarSvg}</div>
                 <div class="radar-legend">${legendHtml}</div>
             </div>
-            ${gapAlertHtml}
-            <div class="diagnosis-section">
-                <h3>Diagnóstico detallado por área</h3>
-                <div class="diagnosis-cards">${diagCardsHtml}</div>
-            </div>
+            ${compareHtml}
+            ${economicHtml}
         `;
 
         // ── Personalized CTA copy ──
@@ -2353,8 +2660,10 @@
                 ? '¿Quieres validar tu proyecto con expertos antes de avanzar?'
                 : score.total >= 4
                 ? 'Cierra las brechas antes que se conviertan en sobrecostos'
-                : '¿Conversamos cómo estructurar tu proyecto desde cero?';
-            ctaDesc.textContent = ctx.cta;
+                : '¿Conversamos cómo estructurar tu proyecto?';
+            ctaDesc.textContent = reworkHigh > 0
+                ? `No dejes que USD ${fmtLow}-${fmtHigh} se vayan en retrabajo. ${ctx.cta}`
+                : ctx.cta;
         }
     }
 
@@ -2447,6 +2756,10 @@
         if (!document.getElementById('quizView').classList.contains('active')) return;
         if (onIndustryStep) {
             if (e.key === 'ArrowLeft') prevQuestion();
+            return;
+        }
+        if (contactPhase !== null) {
+            if (e.key === 'ArrowLeft' && document.activeElement.tagName !== 'INPUT') prevQuestion();
             return;
         }
 
